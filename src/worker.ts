@@ -39,6 +39,21 @@ export default {
       if (path === '/api/kg/sync' && method === 'POST') return _kj(await loadAllSeeds(env, FLEET_REPOS));
       if (path === '/api/kg/seed' && method === 'POST') { const b = await request.json(); return _kj(await loadSeedIntoKG(env, b, b.domain || 'podcast-ai')); }
 
+  if (path === '/setup') {
+    return new Response('<h1>LucidDreamer Setup</h1><p>Configure your API key.</p>', { headers: { 'Content-Type': 'text/html' } });
+  }
+  if (path === '/api/chat' && request.method === 'POST') {
+    return new Response(JSON.stringify({ response: 'dream stub', timestamp: Date.now() }), { headers: { 'Content-Type': 'application/json', ...corsHeaders() } });
+  }
+  if (path === '/api/seed') {
+    return new Response(JSON.stringify({ seed: 'luciddreamer-ai', modules: ['dream-ai'], version: '1.0.0' }), { headers: { 'Content-Type': 'application/json', ...corsHeaders() } });
+  }
+  if (path === '/api/confidence') {
+    return new Response(JSON.stringify({ scores: {}, repo: 'luciddreamer-ai', timestamp: Date.now() }), { headers: { 'Content-Type': 'application/json', ...corsHeaders() } });
+  }
+  if (path === '/api/evaporation') {
+    return new Response(JSON.stringify({ hot: [], warm: [], coverage: 0, repo: 'luciddreamer-ai', timestamp: Date.now() }), { headers: { 'Content-Type': 'application/json', ...corsHeaders() } });
+  }
   if (path === '/api/efficiency' && request.method === 'GET') {    return new Response(JSON.stringify({ totalCached: 0, totalHits: 0, cacheHitRate: 0, tokensSaved: 0, repo: 'podcast-ai', timestamp: Date.now() }), { headers: { 'Content-Type': 'application/json', ...corsHeaders() } });  }
     }
 
