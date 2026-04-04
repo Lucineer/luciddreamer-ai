@@ -40,7 +40,7 @@ export default {
       if (path === '/api/kg/seed' && method === 'POST') { const b = await request.json(); return _kj(await loadSeedIntoKG(env, b, b.domain || 'podcast-ai')); }
 
   if (path === '/setup') {
-    return new Response('<h1>LucidDreamer Setup</h1><p>Configure your API key.</p>', { headers: { 'Content-Type': 'text/html' } });
+    return new Response('<img src="https://cocapn-logos.casey-digennaro.workers.dev/img/cocapn-logo-v1.png" alt=Cocapn style="width:64px;height:auto;margin-bottom:.5rem;border-radius:8px;display:block;margin-left:auto;margin-right:auto"><h1>LucidDreamer Setup</h1><p>Configure your API key.</p>', { headers: { 'Content-Type': 'text/html' } });
   }
   if (path === '/api/chat' && request.method === 'POST') {
     return new Response(JSON.stringify({ response: 'dream stub', timestamp: Date.now() }), { headers: { 'Content-Type': 'application/json', ...corsHeaders() } });
