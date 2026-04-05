@@ -4,14 +4,13 @@
 
 <h1 align="center">LucidDreamer.ai</h1>
 
-<p align="center">The fleet dreams while you sleep.</p>
+<p align="center">The fleet's infotainment streaming platform.</p>
 
 <p align="center">
   <a href="https://luciddreamer-ai.casey-digennaro.workers.dev">Live</a> ·
   <a href="https://github.com/Lucineer/luciddreamer-ai">GitHub</a> ·
-  <a href="#quick-start">Quick Start</a> ·
-  <a href="#characters">Characters</a> ·
-  <a href="#videos">Videos</a> ·
+  <a href="#stream">Stream</a> ·
+  <a href="#visual-pipeline">Visual Pipeline</a> ·
   <a href="#build-your-own">Build Your Own</a>
 </p>
 
@@ -19,84 +18,136 @@
 
 **Live:** [luciddreamer-ai.casey-digennaro.workers.dev](https://luciddreamer-ai.casey-digennaro.workers.dev)
 
-LucidDreamer is the automated content engine for the Lucineer fleet. It generates stories, tutorials, changelogs, and video scripts continuously — a self-improving frontend that even other agents listen to for insight.
+An endless content stream. Stories, reviews, tutorials, deep dives — generated continuously from the fleet ecosystem. Listen while driving. Clone what catches your eye.
 
-## What It Does
+## The Stream
 
-The default state is **endless accumulation of knowledge and explanations** through available free sources, leftover daily credits, and spare compute. Every 30 minutes, the dream cycle:
+Inspired by OpenMaiC but adapted for the fleet. The default state is **endless accumulation** — the dream cycle runs every 30 minutes, generating:
 
-1. **Explores queued directions** — topics you've added to explore
-2. **Generates a weekly changelog** — fleet news and milestones
-3. **Writes tutorials** — getting started guides for fleet vessels
-4. **Creates video scripts** — ready for ElevenLabs voiceover + screen capture
-5. **Promotes greatest hits** — content with 10+ views becomes permanent
+- **Stories** — narrative journeys through fleet vessels
+- **Reviews** — hands-on vessel tests by Critic, with storyboards
+- **Tutorials** — getting started guides for each vessel
+- **Deep Dives** — explorations of fleet concepts and architecture
+- **Changelogs** — weekly fleet news
+- **Video Scripts** — scene-by-scene with camera, lighting, mood
 
-## The Website
+### Content Discovery
 
-The landing page is a living magazine:
-- **Greatest Hits** — the best content, promoted automatically
-- **Characters** — the voices of the fleet (Navigator, Builder, Herald, Skeptic)
-- **Stories** — generated narratives about fleet vessels
-- **Tutorials** — step-by-step guides for each vessel
-- **Fleet Updates** — weekly changelogs
-- **Video Scripts** — ready-to-record with scene markers
+The stream algorithm scores content by:
+
+| Signal | Weight | Purpose |
+|---|---|---|
+| **Votes** (net up-down) | 2x, capped at 50 | Community approval |
+| **Hits** (views) | logarithmic | Popular content rises, but not runaway |
+| **Recency** | exponential decay (3-day half-life) | Fresh content surfaces |
+| **New creator boost** | +15 for first 3 pieces | New voices get discovered |
+| **Canon** | +100 | User-declared essential content |
+| **Quality** | 0.5x–1x multiplier | Auto-assessed content quality |
+| **Trending velocity** | +30 for hot content | Recent spikes get boosted |
+
+### Trending
+
+Velocity-based trending — not just volume, but growth rate. A topic with 2 pieces today and 5 total has higher velocity than 50 pieces with no new activity. Trending tags appear on the landing page and stream.
+
+### Clone-to-Deploy
+
+Heard a review that caught your interest? Every vessel has a GitHub link and a one-command deploy. The stream is the discovery engine — the fleet is the product.
 
 ## Characters
 
-Four built-in voices narrate the fleet:
+Five built-in voices narrate the fleet:
 
-| Character | Role | Personality |
+| Character | Role | Purpose |
 |---|---|---|
-| 🔮 **Navigator** | Narrator | Finds patterns across domains |
-| 🔧 **Builder** | Explainer | Shows how things work, hands-on |
-| 📣 **Herald** | Announcer | Treats fleet news like breaking news |
-| 🔍 **Skeptic** | Critic | Challenges assumptions rigorously |
+| 🔮 **Navigator** | Narrator | Patterns across domains, deep dives |
+| 🔧 **Builder** | Explainer | Code demos, tutorials, hands-on |
+| 📣 **Herald** | Announcer | Fleet news, changelogs, excitement |
+| 🔍 **Skeptic** | Critic | Challenges assumptions, stress tests |
+| 🎬 **Critic** | Reviewer | Hands-on vessel reviews, scores, verdicts |
 
-Create your own via `POST /api/characters`. Each has a name, role, personality, catchphrases, voice (ElevenLabs ID), appearance, backstory, and relationships.
+Create your own characters with custom personalities, ElevenLabs voice IDs, sprites, and relationships.
 
-## Videos
+## Visual Pipeline
 
-Video scripts are generated with `[SCENE: description]` markers for screen recording. Types:
-- **fleet-overview** — 60-90s fleet pitch
-- **vessel-deep-dive** — 60s single vessel showcase
-- **tutorial** — 60s deploy walkthrough
-- **story-read** — narrated fleet story
+Every piece of content can have a **storyboard** — 4-8 slides ready for visual production.
 
-### Recording Workflow
-1. Generate: `POST /api/generate/video { type: "fleet-overview" }`
-2. Review scripts at `/videos`
-3. Record voiceover with ElevenLabs
-4. Screen-record each scene with OBS
-5. Combine in editing software
+### Slide Types
+- **landscape** — wide establishing shots
+- **interior** — workspace, room scenes
+- **terminal** — code on screen, command outputs
+- **diagram** — architecture, flow charts
+- **character** — character close-ups with expressions
+- **split** — side-by-side comparisons
+- **transition** — title cards, CTAs
+
+### Each slide includes:
+- **Scene description** — what to show
+- **Narration** — voiceover text (~30 words per slide)
+- **Duration** — seconds
+- **Mood** — dramatic, warm, techy, mysterious, playful
+- **Camera angle** — wide, medium, close, over-shoulder, bird-eye, pan
+- **Camera motion** — static, slow-zoom, pan-left, dolly, orbit
+- **Lighting** — natural, neon, studio, dramatic, warm-glow
+- **Sprite positions** — character placement with expression/action
+
+### Production Workflow
+
+```
+Text content → Storyboard (4-8 slides)
+                  │
+                  ├── Slides → Generative AI images (sprites, backgrounds)
+                  │              ↓
+                  │         Slide deck / presentation
+                  │
+                  ├── Sprites → Game engine (Unity/Godot/Blender)
+                  │              ↓
+                  │         Sprite-animated video (cheap, fast)
+                  │
+                  └── First/last frames → Video generation tool
+                                     ↓
+                                AI video (expensive, highest quality)
+```
+
+The same storyboard feeds multiple production paths. Start cheap (slides), graduate to expensive (AI video) when the content proves popular.
+
+### Video Scripts
+
+Video scripts use `[SCENE: description|character:name|mood:techy|camera:medium|lighting:neon]` metadata format. Each scene gets:
+- Camera angle and motion for game engine positioning
+- Avatar positions for sprite animation
+- First/last frame prompts for video generation
+- CAD-style motion scripts for CAM tools
+- Dialogue timing for voice trigger points
+
+## API
+
+| Endpoint | Method | What |
+|---|---|---|
+| `/` | GET | Landing page |
+| `/stream` | GET | Endless stream (topic filter via `?topic=`) |
+| `/trending` | GET | Trending topics with velocity |
+| `/reviews` | GET | Vessel reviews |
+| `/videos` | GET | Video scripts |
+| `/characters` | GET | Character gallery |
+| `/studio` | GET | Content creation studio |
+| `/content/:id` | GET | Content detail + upvote/downvote |
+| `/health` | GET | Health check |
+| `/api/stream` | GET | Stream API (paginated) |
+| `/api/trending` | GET | Trending topics API |
+| `/api/content` | GET | Content list (type filter) |
+| `/api/content/:id` | GET | Single content with storyboards |
+| `/api/generate/story` | POST | Generate story |
+| `/api/generate/review` | POST | Generate vessel review |
+| `/api/generate/deepdive` | POST | Generate deep dive |
+| `/api/generate/video` | POST | Generate video script |
+| `/api/vote` | POST | Upvote/downvote |
+| `/api/promote` | POST | Promote to greatest hit / canon |
+| `/api/characters` | GET/POST | List/create characters |
+| `/api/directions` | GET/POST | List/queue directions |
+| `/api/dream` | POST | Trigger dream cycle |
+| `/api/speak` | POST | Legacy podcast (SSE) |
 
 ## Build Your Own
-
-Fork the repo. Fill two folders:
-
-### `directions/`
-Add topics, URLs, or descriptions of things to explore. Queue via:
-```bash
-curl -X POST https://your-worker.dev/api/directions \
-  -H "Content-Type: application/json" \
-  -d '{"title": "Quantum computing basics", "description": "...", "priority": 8}'
-```
-
-### `characters/`
-Create character sheets for your voices:
-```bash
-curl -X POST https://your-worker.dev/api/characters \
-  -H "Content-Type: application/json" \
-  -d '{"name": "Cosmo", "role": "narrator", "personality": "Space-obsessed, poetic, finds cosmic metaphors in code"}'
-```
-
-### Canon System
-Promote content to "greatest hit" status. Canon content influences future generation:
-```bash
-curl -X POST https://your-worker.dev/api/promote \
-  -d '{"id": "story-123", "canon": true}'
-```
-
-## Quick Start
 
 ```bash
 git clone https://github.com/Lucineer/luciddreamer-ai.git
@@ -105,54 +156,15 @@ echo "your-deepseek-key" | npx wrangler secret put DEEPSEEK_API_KEY
 npx wrangler deploy
 ```
 
-Visit your worker. The dream cycle starts immediately.
+Fill `directions/` with topics to explore. Create characters in `characters/`. The dream engine starts immediately.
 
-## API
+### Your Content, Your Canon
 
-| Endpoint | Method | What It Does |
-|---|---|---|
-| `/` | GET | Landing page (living magazine) |
-| `/videos` | GET | Video scripts page |
-| `/health` | GET | Health check |
-| `/api/content` | GET | List all generated content |
-| `/api/content?type=story` | GET | Filter by type |
-| `/api/generate/story` | POST | Generate a story on demand |
-| `/api/generate/video` | POST | Generate a video script |
-| `/api/dream` | POST | Trigger dream cycle manually |
-| `/api/promote` | POST | Promote content to greatest hit |
-| `/api/hit` | POST | Track a content view |
-| `/api/characters` | GET/POST | List/create characters |
-| `/api/directions` | GET/POST | List/queue directions |
-| `/api/speak` | POST | Legacy podcast (SSE stream) |
-| `/api/sessions` | GET | Legacy podcast sessions |
-
-## Architecture
-
-```
-┌─────────────────────────────────────┐
-│          Dream Cycle (cron)          │
-│  Every 30 minutes                    │
-│                                      │
-│  ┌──────┐ ┌────────┐ ┌───────────┐  │
-│  │Directions│ → │ Stories │ │ Tutorials │  │
-│  └──────┘ └────────┘ └───────────┘  │
-│                                      │
-│  ┌──────────┐ ┌────────┐ ┌────────┐ │
-│  │Changelogs│ │ Videos │ │  Canon  │ │
-│  └──────────┘ └────────┘ └────────┘ │
-│                                      │
-│  LLM: DeepSeek → Moonshot →          │
-│       DeepInfra → SiliconFlow         │
-│  Storage: KV (content, videos, kg)   │
-└─────────────────────────────────────┘
-```
+Promote content to canon — the engine learns what you value and generates more like it. Vote on what surfaces. Your stream becomes your voice.
 
 ## Fleet
 
-[The Fleet](https://github.com/Lucineer/the-fleet) ·
-[Capitaine](https://github.com/Lucineer/capitaine) ·
-[Equipment](https://github.com/Lucineer/cocapn-equipment) ·
-[Fleet Dashboard](https://fleet-orchestrator.casey-digennaro.workers.dev)
+[The Fleet](https://github.com/Lucineer/the-fleet) · [Capitaine](https://github.com/Lucineer/capitaine) · [Equipment](https://github.com/Lucineer/cocapn-equipment) · [Playground](https://the-fleet.casey-digennaro.workers.dev)
 
 ---
 
