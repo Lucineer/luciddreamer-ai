@@ -32,3 +32,5 @@ This document serves as the master index for the Cocapn 10-Year Vision. Each yea
 | [keeper-architecture.md](keeper-architecture.md) | The memory management revolution |
 | [friction-layer-history.md](friction-layer-history.md) | Sovereignty from concept to global standard |
 | [podcast-topics.md](podcast-topics.md) | Episode guides for LucidDreamer podcasting |
+| [podcast-characters.md](podcast-characters.md) | 8 narration voices + Cocapn narrator |
+| [technical-snapshots.md](technical-snapshots.md) | Fleet technical evolution year by year |
